@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from "next/head";
 
 const Home = () => (
   <div className="container">
@@ -8,14 +8,19 @@ const Home = () => (
     </Head>
 
     <main>
-      <h1 className="title">
-        SpiritWord Chapel
-      </h1>
+      <h1 className="title">SpiritWord Chapel</h1>
 
-      <p className="description">
-        Website coming soon!
+      <p className="description">Website coming soon!</p>
+      <p>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/9zPju6-DNwg"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </p>
-
     </main>
 
     <style jsx>{`
@@ -159,6 +164,6 @@ const Home = () => (
       }
     `}</style>
   </div>
-)
+);
 
-export default Home
+export default Home;

@@ -10,16 +10,16 @@ const Home = () => (
     <main>
       <h1 className="title">SpiritWord Chapel</h1>
 
-      <p className="description">Website coming soon!</p>
+      <p className="description">Virtual church starts at 10:30AM PDT!</p>
       <p>
-        <iframe
+        {/* <iframe
           width="560"
           height="315"
           src="https://www.youtube.com/embed/9zPju6-DNwg"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-        ></iframe>
+        ></iframe> */}
       </p>
     </main>
 

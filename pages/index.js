@@ -25,6 +25,19 @@ const Home = () => (
           allowfullscreen
         ></iframe> */}
       </p>
+      <p className="description">Download today's sermon notes and songs:</p>
+      <a href="/spiritword_1_Tim_3-1-7.pdf" download>
+        <div className="card">
+          <img src="/pdf_icon.svg" width="20"></img>
+          <div>Sermon.pdf</div>
+        </div>
+      </a>
+      <a href="/spiritword_songs_3-29-20.pdf" download>
+        <div className="card">
+          <img src="/pdf_icon.svg" width="20"></img>
+          <div>Songs.pdf</div>
+        </div>
+      </a>
     </main>
 
     <style jsx>{`
@@ -117,15 +130,22 @@ const Home = () => (
       }
 
       .card {
-        margin: 1rem;
-        flex-basis: 45%;
-        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0.5rem;
+        padding: 0.5rem;
         text-align: left;
         color: inherit;
         text-decoration: none;
         border: 1px solid #eaeaea;
         border-radius: 10px;
         transition: color 0.15s ease, border-color 0.15s ease;
+        height: 50px;
+      }
+
+      .card img {
+        margin-right: 0.5em;
       }
 
       .card:hover,

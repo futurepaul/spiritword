@@ -4,13 +4,17 @@ const Home = () => (
   <div className="container">
     <Head>
       <title>SpiritWord Chapel</title>
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/favicon.ico?v=2" />
     </Head>
 
     <main>
-      <h1 className="title">SpiritWord Chapel</h1>
+      <img
+        src="/spiritword_spaced.svg"
+        width="400"
+        alt="SpiritWord Chapel"
+      ></img>
 
-      <p className="description">Virtual church starts at 10:30AM PDT!</p>
+      <p className="description">Virtual church starts here at 10:30AM PDT!</p>
       <p>
         {/* <iframe
           width="560"

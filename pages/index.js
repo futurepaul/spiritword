@@ -16,14 +16,14 @@ const Home = () => (
 
       <p className="description">Virtual church starts here at 10:30AM PDT!</p>
       <p>
-        {/* <iframe
+        <iframe
           width="560"
           height="315"
-          src="https://www.youtube.com/embed/9zPju6-DNwg"
+          src="https://www.youtube.com/embed/C1xbA4TqneU"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-        ></iframe> */}
+        ></iframe>
       </p>
       <p className="description">Download today's sermon notes and songs:</p>
       <a href="/spiritword_1_Tim_3-1-7.pdf" download>

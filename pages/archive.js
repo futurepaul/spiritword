@@ -4,12 +4,12 @@ import Embed from "../components/Embed";
 
 const Home = () => (
   <Layout>
-    <p className="description">Virtual church starts here at 10:30AM PDT!</p>
-
-    <Embed id="aelYPTVFig4" />
-
-    <p className="description">Download today's sermon notes and songs:</p>
-    <div>
+    <div className="sermon-item">
+      <h2>March 29th</h2>
+      <h3>1 Timothy 3:1-7, Instruction for Elders</h3>
+      <p>
+        <Embed id={"C1xbA4TqneU"}></Embed>
+      </p>
       <DownloadButton url="/spiritword_1_Tim_3-1-7.pdf">
         Sermon.pdf
       </DownloadButton>
@@ -17,10 +17,6 @@ const Home = () => (
         Songs.pdf
       </DownloadButton>
     </div>
-
-    <p>
-      <a href="/archive">View past sermons</a>
-    </p>
   </Layout>
 );
 

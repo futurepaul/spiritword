@@ -10,10 +10,10 @@ const Home = () => (
 
     <p className="description">Download today's sermon notes and songs:</p>
     <div>
-      <DownloadButton url="/spiritword_1_Tim_3-1-7.pdf">
+      <DownloadButton url="/spiritword_sermon_4-5-20.pdf">
         Sermon.pdf
       </DownloadButton>
-      <DownloadButton url="/spiritword_songs_3-29-20.pdf">
+      <DownloadButton url="/spiritword_songs_4-5-20.pdf">
         Songs.pdf
       </DownloadButton>
     </div>

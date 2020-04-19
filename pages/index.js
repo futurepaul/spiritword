@@ -10,7 +10,7 @@ const Home = () => (
     <SermonItem
       date="April 19th"
       title="1 Timothy 4, Controlling Our Behavior"
-      embedId="CI_uK8ZoZNo"
+      embedId="RSS59-zQI0g"
       sermonPdf="/spiritword_sermon_4-19-20.pdf"
       songsPdf="/spiritword_songs_4-19-20.pdf"
     />

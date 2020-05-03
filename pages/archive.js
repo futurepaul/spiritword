@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="April 26th"
+      title="1 Timothy 4, Controlling Our Behavior"
+      embedId="UmFvwwABc18"
+      sermonPdf="/spiritword_sermon_4-26-20.pdf"
+      songsPdf=""
+    />
+    <SermonItem
       date="April 19th"
       title="1 Timothy 4, Controlling Our Behavior"
       embedId="RSS59-zQI0g"

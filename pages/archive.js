@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="May 10th"
+      title="1 Timothy 5, Honoring Women in the Church"
+      embedId="3qwcjDpjcuE"
+      sermonPdf="/spiritword_sermon_5-10-20.pdf"
+      songsPdf="/spiritword_songs_5-10-20.pdf"
+    />
+    <SermonItem
       date="May 3rd"
       title="1 Timothy 4, A Recap of Paul’s Instruction to Timothy"
       embedId="l58WDIQJ1t8"

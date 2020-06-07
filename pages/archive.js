@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="May 31st"
+      title="1 Timothy 6, Teach, Preach, Flee, Pursue, Fight, and Take Hold"
+      embedId="z4UZ3Eh8F7E"
+      sermonPdf="/spiritword_sermon_5-31-20.pdf"
+      songsPdf="/spiritword_songs_5-31-20.pdf"
+    />
+    <SermonItem
       date="May 24th"
       title="1 Timothy 5, More Sound Teaching"
       embedId="qjBfPER0afM"

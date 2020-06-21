@@ -6,6 +6,11 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="June 7th"
+      title="1 Timothy from the road!"
+      embedId="EMXo6ugAbxQ"
+    />
+    <SermonItem
       date="May 31st"
       title="1 Timothy 6, Teach, Preach, Flee, Pursue, Fight, and Take Hold"
       embedId="z4UZ3Eh8F7E"

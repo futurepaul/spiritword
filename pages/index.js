@@ -10,7 +10,9 @@ const Home = () => (
     <SermonItem
       date="June 21st"
       title="2 Timothy 1, Power, Love and a Sound Mind"
-      embedId=""
+      embedId="zBmv-74Cl9M"
+      sermonPdf="/spiritword_sermon_6-21-20.pdf"
+      songsPdf="/spiritword_songs_6-21-20.pdf"
     />
 
     <p>

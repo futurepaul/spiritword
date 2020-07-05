@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="June 28th"
+      title="2 Timothy 1, Power, Love and a Sound Mind Part 2"
+      embedId="_U8pN5NENf0"
+      sermonPdf="/spiritword_sermon_6-28-20.pdf"
+      songsPdf="/spiritword_songs_6-28-20.pdf"
+    />
+    <SermonItem
       date="June 21st"
       title="2 Timothy 1, Power, Love and a Sound Mind"
       embedId="zBmv-74Cl9M"

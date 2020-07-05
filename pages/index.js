@@ -8,11 +8,11 @@ const Home = () => (
     <p className="description">Virtual church starts here at 10:30AM PDT!</p>
 
     <SermonItem
-      date="June 28th"
-      title="2 Timothy 1, Power, Love and a Sound Mind Part 2"
-      embedId="_U8pN5NENf0"
-      sermonPdf="/spiritword_sermon_6-28-20.pdf"
-      songsPdf="/spiritword_songs_6-28-20.pdf"
+      date="July 5th"
+      title="2 Timothy 1, Stand Firm, Christ Died to Make Men Holy"
+      embedId="atbsOf8oL_A"
+      sermonPdf="/spiritword_sermon_7-5-20.pdf"
+      songsPdf="/spiritword_songs_7-5-20.pdf"
     />
 
     <p>

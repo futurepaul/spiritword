@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="July 12th"
+      title="2 Timothy 1, Join Me in Suffering for the Gospel"
+      embedId="H3KxRiGUyWU"
+      sermonPdf="/spiritword_sermon_7-12-20.pdf"
+      songsPdf="/spiritword_songs_7-12-20.pdf"
+    />
+    <SermonItem
       date="July 5th"
       title="2 Timothy 1, Stand Firm, Christ Died to Make Men Holy"
       embedId="atbsOf8oL_A"

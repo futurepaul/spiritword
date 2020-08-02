@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="July 26th"
+      title="2 Timothy 1, God's Plan, From All Eternity, But Now"
+      embedId="vNZd8q2GAj8"
+      sermonPdf="/spiritword_sermon_7-26-20.pdf"
+      songsPdf="/spiritword_songs_7-26-20.pdf"
+    />
+    <SermonItem
       date="July 12th"
       title="2 Timothy 1, Join Me in Suffering for the Gospel"
       embedId="H3KxRiGUyWU"

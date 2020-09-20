@@ -6,6 +6,14 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="September 13th"
+      title="2 Timothy 3, Difficult Times"
+      embedId="Wf4dgvpEGx8"
+      sermonPdf="/spiritword_sermon_9-13-20.pdf"
+      songsPdf="/spiritword_songs_9-13-20.pdf"
+    />
+
+    <SermonItem
       date="September 6th"
       title="2 Timothy 2, The Teacher / Believer's Character"
       embedId="8FYo2QzdFoI"

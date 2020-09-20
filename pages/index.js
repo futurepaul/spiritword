@@ -8,7 +8,7 @@ const Home = () => (
     <SermonItem
       date="September 20th"
       title="2 Timothy 3, The Value of the Scriptures"
-      embedId="KBMGcJd5mKk"
+      embedId="P0O61v7NDf0"
       sermonPdf="/spiritword_sermon_9-20-20.pdf"
       songsPdf="/spiritword_songs_9-20-20.pdf"
     />

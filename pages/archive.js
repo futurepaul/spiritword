@@ -6,6 +6,14 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="September 27th"
+      title="2 Timothy 4, Christ's Appearing and His Kingdom"
+      embedId="uRyOtcECpTU"
+      sermonPdf="/spiritword_sermon_9-27-20.pdf"
+      songsPdf="/spiritword_songs_9-27-20.pdf"
+    />
+
+    <SermonItem
       date="September 20th"
       title="2 Timothy 3, The Value of the Scriptures"
       embedId="P0O61v7NDf0"

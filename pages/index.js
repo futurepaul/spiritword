@@ -10,6 +10,7 @@ const Home = () => (
       title="2 Timothy 4, The Lion of Judah"
       embedId="nxkgfnBSYQM"
       sermonPdf="/spiritword_sermon_10-18-20.pdf"
+      songsPdf="/spiritword_songs_10-18-20.pdf"
     />
 
     <p>

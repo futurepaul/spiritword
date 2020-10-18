@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="October 11"
+      title="2 Timothy 4, Timothy's Race and Paul's Finish"
+      embedId="T2ERD0DrkKQ"
+      sermonPdf="/spiritword_sermon_10-11-20.pdf"
+    />
+
+    <SermonItem
       date="October 4"
       title="2 Timothy 4, Fulfill Your Ministry"
       embedId="HrpXEeruYow"

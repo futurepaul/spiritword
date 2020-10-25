@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="October 18"
+      title="2 Timothy 4, The Lion of Judah"
+      embedId="nxkgfnBSYQM"
+      sermonPdf="/spiritword_sermon_10-18-20.pdf"
+      songsPdf="/spiritword_songs_10-18-20.pdf"
+    />
+    <SermonItem
       date="October 11"
       title="2 Timothy 4, Timothy's Race and Paul's Finish"
       embedId="T2ERD0DrkKQ"

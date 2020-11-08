@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="November 1"
+      title="Titus 1:1-4, Hope of Eternal Life"
+      embedId="fOzhSf7AImI"
+      sermonPdf="/spiritword_sermon_11-1-20.pdf"
+      songsPdf="/spiritword_songs_11-1-20.pdf"
+    />
+    <SermonItem
       date="October 25"
       title="Titus 1:1-4, Titus Intro"
       embedId="GZ2DiIIk_kI"

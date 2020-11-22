@@ -6,6 +6,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="November 15"
+      title="Titus 1:5-11, Appointing Qualified Elders"
+      embedId="CPnPVNYrx8o"
+      sermonPdf="/spiritword_sermon_11-15-20.pdf"
+      songsPdf="/spiritword_songs_11-15-20.pdf"
+    />
+    <SermonItem
       date="November 8"
       title="Titus 1:5-10, Appointing Qualified Elders"
       embedId="aBQdAs8RCfk"

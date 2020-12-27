@@ -5,6 +5,12 @@ import SermonItem from "../components/SermonItem";
 
 const Home = () => (
   <Layout>
+    <SermonItem
+      date="December 20"
+      title="Come, O Come, Emmanuel"
+      embedId="A64HzXlnhIs"
+      sermonPdf="/spiritword_sermon_12-20-20.pdf"
+    />
       <SermonItem
       date="December 13"
       title="Hark the Herald Angels Sing"

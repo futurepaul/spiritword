@@ -6,10 +6,10 @@ const Home = () => (
     <p className="description">Virtual church starts here at 10:30AM PDT!</p>
 
     <SermonItem
-      date="December 27"
-      title="Come Thou Long Expected Jesus"
-      embedId="eBiFFqcgUQU"
-      sermonPdf="/spiritword_sermon_12-27-20.pdf"
+      date="January 3"
+      title="Titus 2, Proclaiming Sound Doctrine"
+      embedId="v8BGteogFJE"
+      sermonPdf="/spiritword_sermon_1-3-21.pdf"
     />
 
     <p>

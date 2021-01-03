@@ -6,6 +6,12 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="December 27"
+      title="Come Thou Long Expected Jesus"
+      embedId="eBiFFqcgUQU"
+      sermonPdf="/spiritword_sermon_12-27-20.pdf"
+    />
+    <SermonItem
       date="December 20"
       title="Come, O Come, Emmanuel"
       embedId="A64HzXlnhIs"

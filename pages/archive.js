@@ -5,6 +5,12 @@ import SermonItem from "../components/SermonItem";
 
 const Home = () => (
   <Layout>
+<SermonItem
+      date="January 17"
+      title="Titus 3, But -- When God"
+      embedId="_4mEHvYpRUo"
+      sermonPdf="/spiritword_sermon_1-17-21.pdf"
+    />
     <SermonItem
       date="January 10"
       title="Titus 3, All Are Saved by Grace"

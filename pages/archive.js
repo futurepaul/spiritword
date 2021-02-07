@@ -6,6 +6,12 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
 <SermonItem
+      date="January 31"
+      title="Luke 1, God's Plan in Miraculous Births"
+      embedId="Yn0aElHNWdM"
+      sermonPdf="/spiritword_sermon_1-31-21.pdf"
+    />
+<SermonItem
       date="January 24"
       title="Luke 1:1-17, John the Baptist"
       embedId="AUUnqyXSQlI"

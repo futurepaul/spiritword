@@ -8,7 +8,7 @@ const SermonItem = ({ date, title, embedId, sermonPdf, songsPdf }) => (
     <p>
       <Embed id={embedId} />
     </p>
-    <DownloadButton url={sermonPdf}>Sermon.pdf</DownloadButton>
+    {sermonPdf && <DownloadButton url={sermonPdf}>Sermon.pdf</DownloadButton>}
     {songsPdf && <DownloadButton url={songsPdf}>Songs.pdf</DownloadButton>}
   </div>
 );

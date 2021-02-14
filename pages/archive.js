@@ -5,19 +5,20 @@ import SermonItem from "../components/SermonItem";
 
 const Home = () => (
   <Layout>
-<SermonItem
+    <SermonItem date="February 7" title="Luke 2" embedId="N1p45YmXrgc" />
+    <SermonItem
       date="January 31"
       title="Luke 1, God's Plan in Miraculous Births"
       embedId="Yn0aElHNWdM"
       sermonPdf="/spiritword_sermon_1-31-21.pdf"
     />
-<SermonItem
+    <SermonItem
       date="January 24"
       title="Luke 1:1-17, John the Baptist"
       embedId="AUUnqyXSQlI"
       sermonPdf="/spiritword_sermon_1-24-21.pdf"
     />
-<SermonItem
+    <SermonItem
       date="January 17"
       title="Titus 3, But -- When God"
       embedId="_4mEHvYpRUo"
@@ -30,14 +31,12 @@ const Home = () => (
       sermonPdf="/spiritword_sermon_1-10-21.pdf"
     />
 
-
     <SermonItem
       date="January 3"
       title="Titus 2, Proclaiming Sound Doctrine"
       embedId="v8BGteogFJE"
       sermonPdf="/spiritword_sermon_1-3-21.pdf"
     />
-
 
     <SermonItem
       date="December 27"
@@ -51,7 +50,7 @@ const Home = () => (
       embedId="A64HzXlnhIs"
       sermonPdf="/spiritword_sermon_12-20-20.pdf"
     />
-      <SermonItem
+    <SermonItem
       date="December 13"
       title="Hark the Herald Angels Sing"
       embedId="T5gD8vcJUcc"

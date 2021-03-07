@@ -5,10 +5,10 @@ const Home = () => (
   <Layout>
     <p className="description">Virtual church starts here at 10:30AM PDT!</p>
     <SermonItem
-      date="February 28"
-      title="Luke 3, A Tale of Two Testaments"
-      embedId="I3KRZ-SpdIU"
-      sermonPdf="/spiritword_sermon_2-28-21.pdf"
+      date="March 7"
+      title="Luke 3, A Tale of Two Testaments (John the Baptist)"
+      embedId="4h8WkiE7cn8"
+      sermonPdf="/spiritword_sermon_3-7-21.pdf"
     />
 
     <p>

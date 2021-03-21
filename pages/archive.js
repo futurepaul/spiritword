@@ -4,6 +4,12 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="March 14"
+      title="Luke 3, A Tale of Two Testaments (Jesus of Nazareth)"
+      embedId="_rG2kfD5_I4"
+      sermonPdf="/spiritword_sermon_3-14-21.pdf"
+    />
+    <SermonItem
       date="March 7"
       title="Luke 3, A Tale of Two Testaments (John the Baptist)"
       embedId="4h8WkiE7cn8"

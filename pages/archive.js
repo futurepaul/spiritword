@@ -4,6 +4,12 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="March 28"
+      title="Luke 4:1-12 Jesus Tempted by the Devil"
+      embedId="4nVd-MYhnjc"
+      sermonPdf="/spiritword_sermon_3-28-21.pdf"
+    />
+    <SermonItem
       date="March 21"
       title="Luke 4, Christ's Ministry Begins in the Wilderness"
       embedId="AJMgmI6ndVM"

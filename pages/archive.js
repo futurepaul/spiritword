@@ -4,6 +4,13 @@ import SermonItem from "../components/SermonItem";
 const Home = () => (
   <Layout>
     <SermonItem
+      date="April 11"
+      title="Luke 4:18-30 Not Even Welcome in His Hometown"
+      embedId="dXvo4vFhcY8"
+      sermonPdf="/spiritword_sermon_4-11-21.pdf"
+    />
+
+    <SermonItem
       date="April 4"
       title="Luke 4:16-22 The Day of the Lord's Favor"
       embedId="qHP550QgyHw"

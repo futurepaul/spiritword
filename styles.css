@@ -1,0 +1,17 @@
+html,
+body {
+  font-family: "Orelega One", serif;
+}
+
+body {
+  background: url("./public/spiritword_background_lighten.jpg") no-repeat center
+    center fixed;
+  background-size: cover;
+}
+
+* {
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}

@@ -9,7 +9,6 @@ const Layout = (props) => (
     </Head>
 
     <main>
-      {" "}
       <a href="/">
         <div className="logo">
           <img
@@ -22,21 +21,7 @@ const Layout = (props) => (
       {props.children}
     </main>
 
-    <style jsx>{``}</style>
-
-    <style jsx global>{`
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
+    <style jsx>{`
       .container {
         padding: 0 0.5rem;
         display: flex;
@@ -44,7 +29,6 @@ const Layout = (props) => (
         justify-content: center;
         align-items: stretch;
       }
-
       main {
         padding: 3rem 0;
         flex: 1;

@@ -5,10 +5,10 @@ const Home = () => (
   <Layout>
     <>
       <SermonItem
-        date="April 25"
-        title="Luke 4:31-37 Authority and Power through Faith"
-        embedId="0Pajhi2jTx4"
-        sermonPdf="/spiritword_sermon_4-25-21.pdf"
+        date="May 2"
+        title="Luke 4:31-37 The Walk of Faith"
+        embedId="1jr9mFaX8Z4"
+        sermonPdf="/spiritword_sermon_5-2-21.pdf"
       />
 
       <a href="/archive">

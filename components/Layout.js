@@ -18,7 +18,7 @@ const Layout = (props) => (
           ></img>
         </div>
       </a>
-      {props.children}
+      <div className="content">{props.children}</div>
     </main>
 
     <style jsx>{`

@@ -1,115 +1,16 @@
 import Layout from "../components/Layout";
-import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "../lib/initSupabase";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-
-/**
- * Better DateTimeFormatOptions types
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat for representation details
- */
-export interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
-  localeMatcher?: "best fit" | "lookup";
-  weekday?: "long" | "short" | "narrow";
-  era?: "long" | "short" | "narrow";
-  year?: "numeric" | "2-digit";
-  month?: "numeric" | "2-digit" | "long" | "short" | "narrow";
-  day?: "numeric" | "2-digit";
-  hour?: "numeric" | "2-digit";
-  minute?: "numeric" | "2-digit";
-  second?: "numeric" | "2-digit";
-  timeZoneName?: "long" | "short";
-  formatMatcher?: "best fit" | "basic";
-  hour12?: boolean;
-  /**
-   * Timezone string must be one of IANA. UTC is a universally required recognizable value
-   */
-  timeZone?: "UTC" | string;
-  dateStyle?: "full" | "long" | "medium" | "short";
-  timeStyle?: "full" | "long" | "medium" | "short";
-  calendar?:
-    | "buddhist"
-    | "chinese"
-    | " coptic"
-    | "ethiopia"
-    | "ethiopic"
-    | "gregory"
-    | " hebrew"
-    | "indian"
-    | "islamic"
-    | "iso8601"
-    | " japanese"
-    | "persian"
-    | "roc";
-  dayPeriod?: "narrow" | "short" | "long";
-  numberingSystem?:
-    | "arab"
-    | "arabext"
-    | "bali"
-    | "beng"
-    | "deva"
-    | "fullwide"
-    | " gujr"
-    | "guru"
-    | "hanidec"
-    | "khmr"
-    | " knda"
-    | "laoo"
-    | "latn"
-    | "limb"
-    | "mlym"
-    | " mong"
-    | "mymr"
-    | "orya"
-    | "tamldec"
-    | " telu"
-    | "thai"
-    | "tibt";
-  hourCycle?: "h11" | "h12" | "h23" | "h24";
-  /**
-   * Warning! Partial support
-   */
-  fractionalSecondDigits?: 0 | 1 | 2 | 3;
-}
-
-function toHtmlDate(date: Date): string {
-  // May 19, 2021
-  const options: DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  let dateString = date.toLocaleDateString("en-US", options);
-  return dateString;
-}
-
-function youtubeIdfromUrl(url: string): string {
-  // https://youtu.be/AJMgmI6ndVM
-  // https://www.youtube.com/watch?v=AJMgmI6ndVM
-  if (url.startsWith("https://youtu.be") || url.startsWith("youtu.be")) {
-    let [_head, tail] = url.split("youtu.be/");
-    return tail;
-  } else {
-    let [_head, tail] = url.split("watch?v=");
-    return tail;
-  }
-}
-
-interface FormSermon {
-  title: string;
-  date: Date;
-  pdf: FileList;
-  youtube: string;
-}
-
-interface SupaSermon {
-  sermon_date: string;
-  sermon_title: string;
-  sermon_youtube_id: string;
-  sermon_pdf: string;
-}
+import { useState } from "react";
+import {
+  FormSermon,
+  SupaSermon,
+  youtubeIdfromUrl,
+  toHtmlDate,
+  dateStringToPdfName,
+} from "../lib/sermon";
 
 function SermonEditor() {
   const {
@@ -118,16 +19,39 @@ function SermonEditor() {
     formState: { errors },
   } = useForm<FormSermon>();
 
+  const [error, setError] = useState("");
+
   const router = useRouter();
 
-  const addSermon = async (sermon: SupaSermon) => {
+  const addSermon = async (sermon: SupaSermon, file?: File) => {
     console.log("submitting sermon: ", sermon);
-    let { data: _data, error } = await supabase
+
+    // First upload the pdf and make sure that succeeds
+    // Only try to upload if we have a pdf selected
+    if (sermon.pdf && file) {
+      const {
+        data: _storage_data,
+        error: storage_error,
+      } = await supabase.storage.from("sermon-pdfs").upload(sermon.pdf, file);
+
+      if (storage_error) {
+        console.error("storage error:", storage_error);
+        setError("Unable to upload file.");
+        return;
+      }
+    }
+
+    // Now save the basic sermon data
+    const { data: _sql_data, error: sql_error } = await supabase
       .from("sermons")
       .insert(sermon)
       .single();
-    if (error) console.error(error);
-    else {
+
+    if (sql_error) {
+      console.error("sql error:", sql_error);
+      setError("Unable to save sermon");
+      return;
+    } else {
       console.log("success");
       router.push("/admin");
     }
@@ -135,16 +59,20 @@ function SermonEditor() {
 
   const onSubmit = (data: FormSermon) => {
     const { title, date, pdf, youtube } = data;
+    // Get the embed id from the pasted youtube url
     let embedId = youtubeIdfromUrl(youtube);
     let file = pdf[0];
+    // Convert the Date into a "May 4, 2021" format
     let fixedDate = toHtmlDate(date);
+    // Generate a new PDF filename based on the date
+    let file_name = dateStringToPdfName(fixedDate);
     let sermon = {
-      sermon_date: fixedDate,
-      sermon_title: title,
-      sermon_youtube_id: embedId,
-      sermon_pdf: file.name,
+      date: fixedDate,
+      title: title,
+      youtube_id: embedId,
+      pdf: file_name,
     };
-    addSermon(sermon);
+    addSermon(sermon, file);
   };
 
   const isYouTubeUrl = (value: string): boolean => {
@@ -188,14 +116,24 @@ function SermonEditor() {
           {...register("pdf", { required: false })}
         />
         <div className="buttons">
-          <input type="submit" />
+          <div />
+          <input value="Save" type="submit" />
         </div>
+        {error && <div className="error">{error}</div>}
       </form>
       <style jsx>{`
+        .error {
+          background-color: red;
+          color: white;
+          padding: 0.5rem;
+          margin: 0.5rem;
+
+        }
         span {
           font-size: 0.75rem;
           color: red;
         }
+
         form {
           display: flex;
           flex-direction: column;

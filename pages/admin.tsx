@@ -1,100 +1,79 @@
 import Layout from "../components/Layout";
-import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "../lib/initSupabase";
-import { Auth } from "@supabase/ui";
+import { useState, useEffect } from "react";
+import AdminHeader from "../components/AdminHeader";
+import AdminSingleSermon from "../components/AdminSingleSermon";
+import StyledRow from "../components/StyledRow";
+import { UserContextProvider } from "../lib/UserContext";
+import { useRouter } from "next/router";
 
-function SingleSermon() {
-  const date = "April 11";
-  const title = "Luke 4:18-30 Not Even Welcome in His Hometown";
-  const youtubeId = "dXvo4vFhcY8";
-  const sermonPdf = "spiritword_sermon_4-11-21.pdf";
-  return (
-    <div className="single">
-      <h1>{date.toString()}</h1>
-      <h2>{title}</h2>
-      <a href={`https://youtu.be/${youtubeId}`}>
-        <Image
-          src={`https://i3.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
-          width="240"
-          height="180"
-        />
-      </a>
-      <code>
-        <p>date: "{date}"</p>
-        <p>title: "{title}"</p>
-        <p>youtubeId: "{youtubeId}"</p>
-        <p>sermonPdf="{sermonPdf}"</p>
-      </code>
-      <div className="buttons">
-        <button>Edit</button>
-        <div className="spacer" />
-        <button>Delete</button>
-      </div>
-      <style jsx>{`
-        h1,
-        h2 {
-          margin-bottom: 0.5rem;
-        }
-        p {
-          margin-top: 0.5rem;
-          margin-bottom: 0.5rem;
-        }
-        .single {
-          background-color: white;
-          padding: 1.5rem;
-          margin-bottom: 1rem;
-        }
-        .buttons {
-          display: flex;
-          justify-content: end;
-        }
-        .spacer {
-          width: 1rem;
-        }
-      }
-      `}</style>
-    </div>
-  );
+export async function getServerSideProps({ req }) {
+  const { user } = await supabase.auth.api.getUserByCookie(req);
+
+  if (!user) {
+    return {
+      redirect: { destination: "/login", permanent: false },
+    };
+  }
+
+  return { props: { user } };
 }
 
-function Admin() {
-  const { user } = Auth.useUser();
+function Admin({ user }) {
+  const [sermons, setSermons] = useState([]);
+
+  const router = useRouter();
+
+  const fetchSermons = async () => {
+    let { data: sermons, error } = await supabase
+      .from("sermons")
+      .select("*")
+      .order("id", { ascending: false });
+    if (error) console.log("error", error);
+    else setSermons(sermons);
+  };
+
+  useEffect(() => {
+    fetchSermons();
+  }, []);
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        //if (event === 'PASSWORD_RECOVERY') setAuthView('update_password')
+        if (event === "USER_UPDATED")
+          setTimeout(() => router.push("/login"), 1000);
+        // Send session to /api/auth route to set the auth cookie.
+        // NOTE: this is only needed if you're doing SSR (getServerSideProps)!
+        fetch("/api/auth", {
+          method: "POST",
+          headers: new Headers({ "Content-Type": "application/json" }),
+          credentials: "same-origin",
+          body: JSON.stringify({ event, session }),
+        }).then((res) => res.json());
+      }
+    );
+
+    return () => {
+      authListener.unsubscribe();
+    };
+  }, []);
+
   return (
     <Layout>
-      {!user ? (
-        <Auth
-          supabaseClient={supabase}
-          providers={["google", "github"]}
-          socialLayout="horizontal"
-          socialButtonSize="xlarge"
-        />
-      ) : (
-        <>
-          <div className="row">
-            <h1>Sermons</h1>
-            <Link href="/new" passHref>
-              <button>New</button>
-            </Link>
-          </div>
-          <SingleSermon />
-          <SingleSermon />
-          <SingleSermon />
-        </>
-      )}
-
-      <style jsx>{`
-        .row {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          background-color: black;
-          color: white;
-          padding: 1.5rem;
-          margin-top: 1rem;
-          margin-bottom: 1rem;
-        }
-      `}</style>
+      <UserContextProvider supabaseClient={supabase}>
+        <AdminHeader user={user} />
+        <StyledRow>
+          <h1>Sermons</h1>
+          <Link href="/new" passHref>
+            <button>New</button>
+          </Link>
+        </StyledRow>
+        {sermons.map((sermon) => {
+          return <AdminSingleSermon {...sermon} />;
+        })}
+      </UserContextProvider>
     </Layout>
   );
 }

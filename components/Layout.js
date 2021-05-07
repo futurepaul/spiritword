@@ -55,7 +55,14 @@ const Layout = (props) => (
         width: 200px;
       }
 
+      .content {
+        width: 375px;
+      }
+
       @media screen and (min-width: 600px) {
+        .content {
+          width: 560px;
+        }
         .description {
           font-size: 1.5rem;
         }

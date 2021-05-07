@@ -21,15 +21,7 @@ const SermonItem = ({ date, title, embedId, sermonPdf, songsPdf }) => (
       }
       .sermon-item {
         margin-top: 1rem;
-        width: 375px;
-
         background: white;
-      }
-
-      @media screen and (min-width: 600px) {
-        .sermon-item {
-          width: 560px;
-        }
       }
     `}</style>
   </div>

@@ -2,8 +2,9 @@ import Layout from "../components/Layout";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormError from "../components/FormError";
+import { supabase } from "../lib/initSupabase";
 
 interface LoginForm {
   email: string;
@@ -21,28 +22,36 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log("user updated...");
+        fetch("/api/auth", {
+          method: "POST",
+          headers: new Headers({ "Content-Type": "application/json" }),
+          credentials: "same-origin",
+          body: JSON.stringify({ event, session }),
+        }).then((_res) => router.push(`/admin`));
+      }
+    );
+
+    return () => {
+      authListener.unsubscribe();
+    };
+  }, []);
+
   const loginUser = async (data: LoginForm) => {
     setSubmitError(undefined);
     console.log("logging in...");
     const { email, password } = data;
 
-    const res = await fetch(`/api/login`, {
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
+    const { error: signInError } = await supabase.auth.signIn({
+      email,
+      password,
     });
 
-    const response = await res.json();
-    const { error, user } = response;
-    if (error) {
-      setSubmitError({ message: error });
-    } else if (user) {
-      router.push(`/admin`);
+    if (signInError) {
+      setSubmitError({ message: signInError.message });
     }
   };
 

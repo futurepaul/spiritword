@@ -9,15 +9,26 @@ export interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   day?: "numeric";
 }
 
-export function toHtmlDate(date: Date): string {
+export function toPrettyDate(sqlDate: string): string {
+  // it's gonna be a string like 2021-05-28
+  let date = new Date(sqlDate);
   // May 19, 2021
+  // "UTC" timezone makes sure it's doesn't cross a date line
   const options: DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   };
   let dateString = date.toLocaleDateString("en-US", options);
   return dateString;
+}
+
+export function toHtmlDate(date: Date): string {
+  let string = date.toLocaleString("en-GB");
+  let [head, _tail] = string.split(",");
+  let [day, month, year] = head.split("/");
+  return `${year}-${month}-${day}`;
 }
 
 export function youtubeIdfromUrl(url: string): string {
@@ -32,19 +43,32 @@ export function youtubeIdfromUrl(url: string): string {
   }
 }
 
+// https://learnersbucket.com/examples/javascript/unique-id-generator-in-javascript/
+function s4(): string {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+}
+
+function uid(): string {
+  return `${s4()}${s4()}`;
+}
+
 export function dateStringToPdfName(dateString: string): string {
   let snake = snake_case_string(dateString);
-  return `spiritword_sermon_${snake}.pdf`;
+  return `spiritword_sermon_${snake}_${uid()}.pdf`;
 }
 
 export interface FormSermon {
   title: string;
-  date: Date;
-  pdf: FileList;
+  html_date: string;
+  pdf?: FileList;
+  filename?: string;
   youtube: string;
 }
 
 export interface SupaSermon {
+  id?: number;
   date: string;
   title: string;
   youtube_id: string;
@@ -61,4 +85,14 @@ function snake_case_string(str: string) {
       .map((s) => s.toLowerCase())
       .join("_")
   );
+}
+
+export function isYouTubeUrl(value: string): boolean {
+  let id: string = youtubeIdfromUrl(value);
+  console.log(id);
+  if (id) {
+    return id.length === 11;
+  } else {
+    return false;
+  }
 }

@@ -1,15 +1,28 @@
 import Image from "next/image";
-import { SupaSermon } from "../lib/sermon";
+import { SupaSermon, toPrettyDate } from "../lib/sermon";
+import Link from "next/link";
+
+interface SingleSermonProps {
+  sermon: SupaSermon;
+  deleteSermon: (id: number) => void;
+}
 
 export default function SingleSermon({
-  date,
-  title,
-  youtube_id,
-  pdf,
-}: SupaSermon) {
+  sermon,
+  deleteSermon,
+}: SingleSermonProps) {
+  const { id, date, title, youtube_id, pdf } = sermon;
+
+  const warnThenDelete = () => {
+    const isSure = confirm(`Are you sure you want to delete ${title}?`);
+    if (isSure) {
+      deleteSermon(id);
+    }
+  };
+
   return (
     <div className="single">
-      <h1>{date.toString()}</h1>
+      <h1>{toPrettyDate(date)}</h1>
       <h2>{title}</h2>
       <a href={`https://youtu.be/${youtube_id}`}>
         <Image
@@ -25,9 +38,11 @@ export default function SingleSermon({
         {pdf && <p>sermonPdf="{pdf}"</p>}
       </code>
       <div className="buttons">
-        <button>Edit</button>
+        <Link href={`/edit?id=${id}`}>
+          <button>Edit</button>
+        </Link>
         <div className="spacer" />
-        <button>Delete</button>
+        <button onClick={warnThenDelete}>Delete</button>
       </div>
       <style jsx>{`
         h1,

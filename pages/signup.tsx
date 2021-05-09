@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import FormError from "../components/FormError";
+import { supabase } from "../lib/initSupabase";
 
 interface SignupForm {
   email: string;
@@ -24,23 +25,16 @@ export default function Signup() {
 
   const signUpUser = async (data: SignupForm) => {
     setSubmitError(undefined);
+    console.log("logging in...");
     const { email, password } = data;
 
-    const res = await fetch(`/api/signup`, {
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
+    const { error: signUpError, user } = await supabase.auth.signUp({
+      email,
+      password,
     });
 
-    const response = await res.json();
-    const { error, user } = response;
-    if (error) {
-      setSubmitError({ message: error });
+    if (signUpError) {
+      setSubmitError({ message: signUpError.message });
     } else if (user) {
       const email = encodeURIComponent(user.email);
       router.push(`/confirm?email=${email}`);

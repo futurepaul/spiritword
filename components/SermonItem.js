@@ -1,16 +1,16 @@
 import Embed from "../components/Embed";
 import DownloadButton from "../components/DownloadButton";
+import { toPrettyDate } from "../lib/sermon";
 
-const SermonItem = ({ date, title, embedId, sermonPdf, songsPdf }) => (
+const SermonItem = ({ date, title, embedId, sermonPdf }) => (
   <div className="sermon-item">
     <Embed id={embedId} />
     <div className="info">
-      <h2>{date}</h2>
+      <h2>{toPrettyDate(date)}</h2>
       <div className="spacer" />
       <h3>{title}</h3>
       <div className="spacer" />
       {sermonPdf && <DownloadButton url={sermonPdf}>Sermon.pdf</DownloadButton>}
-      {songsPdf && <DownloadButton url={songsPdf}>Songs.pdf</DownloadButton>}
     </div>
     <style jsx>{`
       .spacer {

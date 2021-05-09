@@ -44,7 +44,7 @@ function Edit({ user }) {
     // Get the embed id from the pasted youtube url
     let embedId = youtubeIdfromUrl(youtube);
     let file = pdf[0];
-    let fixedDate = new Date(html_date);
+    //let fixedDate = new Date(html_date);
 
     // Generate a new PDF filename based on the date
     // But only if we have a new pdf we're uploading
@@ -54,7 +54,7 @@ function Edit({ user }) {
 
     let sermon: SupaSermon = {
       id: Number(id),
-      date: fixedDate,
+      date: html_date,
       title: title,
       youtube_id: embedId,
       pdf: file_name,

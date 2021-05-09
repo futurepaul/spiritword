@@ -4,7 +4,7 @@ import AdminHeader from "../components/AdminHeader";
 import getUserByCookie from "../lib/getUserByCookie";
 import SermonEditor from "../components/SermonEditor";
 import { useRouter } from "next/router";
-import { useAddSermon } from "../lib/api";
+import { useEditSermon } from "../lib/api";
 import {
   dateStringToPdfName,
   FormSermon,
@@ -12,45 +12,72 @@ import {
   youtubeIdfromUrl,
 } from "../lib/sermon";
 
+function youtubeUrlFromId(id: string): string {
+  return `https://www.youtube.com/watch?v=${id}`;
+}
+
+function formSermonfromSupasermon(supa: SupaSermon): FormSermon {
+  let formSermon: FormSermon = {
+    title: supa.title,
+    html_date: supa.date,
+    youtube: youtubeUrlFromId(supa.youtube_id),
+    filename: supa.pdf ? supa.pdf : undefined,
+  };
+
+  return formSermon;
+}
+
 export async function getServerSideProps({ req }) {
   return getUserByCookie(req);
 }
 
-function New({ user }) {
-  const { addSermon, sermonError } = useAddSermon();
-
+function Edit({ user }) {
   const router = useRouter();
+  const { id } = router.query;
+
+  const { sermon: sermonToEdit, editSermon, sermonError } = useEditSermon(
+    Number(id)
+  );
 
   const onSubmit = (data: FormSermon) => {
     const { title, html_date, pdf, youtube } = data;
     // Get the embed id from the pasted youtube url
     let embedId = youtubeIdfromUrl(youtube);
     let file = pdf[0];
+    //let fixedDate = new Date(html_date);
+
     // Generate a new PDF filename based on the date
-    let file_name = dateStringToPdfName(html_date);
+    // But only if we have a new pdf we're uploading
+    let file_name = file
+      ? dateStringToPdfName(html_date)
+      : sermonToEdit.file_name;
+
     let sermon: SupaSermon = {
+      id: Number(id),
       date: html_date,
       title: title,
       youtube_id: embedId,
       pdf: file_name,
     };
-    addSermon(sermon, file).then(() => router.push("/admin"));
+    editSermon(sermon, file).then(() => router.push("/admin"));
   };
 
   return (
     <Layout>
       <AdminHeader user={user} />
       <div className="row">
-        <h1>New</h1>
+        <h1>Edit sermon {`#${id}`}</h1>
         <Link href="/admin" passHref>
           <button>Cancel</button>
         </Link>
       </div>
-      <SermonEditor
-        sermonToEdit={undefined}
-        onSave={onSubmit}
-        submitError={sermonError}
-      />
+      {sermonToEdit && (
+        <SermonEditor
+          sermonToEdit={formSermonfromSupasermon(sermonToEdit)}
+          onSave={onSubmit}
+          submitError={sermonError}
+        />
+      )}
       <style jsx>{`
         .row {
           display: flex;
@@ -67,4 +94,4 @@ function New({ user }) {
   );
 }
 
-export default New;
+export default Edit;

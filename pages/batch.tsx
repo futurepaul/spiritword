@@ -10,31 +10,42 @@ import {
   FormSermon,
   SupaSermon,
   youtubeIdfromUrl,
+  toHtmlDate,
 } from "../lib/sermon";
 
 export async function getServerSideProps({ req }) {
   return getUserByCookie(req);
 }
 
-function New({ user }) {
+interface JsonSermon {
+  title: string;
+  date: string;
+  sermonPdf: string;
+  embedId: string;
+}
+
+function Batch({ user }) {
   const { addSermon, sermonError } = useAddSermon();
 
   const router = useRouter();
 
-  const onSubmit = (data: FormSermon) => {
-    const { title, html_date, pdf, youtube } = data;
-    // Get the embed id from the pasted youtube url
-    let embedId = youtubeIdfromUrl(youtube);
-    let file = pdf[0];
-    // Generate a new PDF filename based on the date
-    let file_name = dateStringToPdfName(html_date);
-    let sermon: SupaSermon = {
-      date: html_date,
-      title: title,
-      youtube_id: embedId,
-      pdf: file_name,
-    };
-    addSermon(sermon, file).then(() => router.push("/admin"));
+  const onSubmit = () => {
+    const data = require("../sermons.json");
+    for (const jsonSermon of data) {
+      const { title, date, sermonPdf, embedId } = jsonSermon;
+      let html_date = toHtmlDate(new Date(Date.parse(date)));
+      let trimmed_pdf = sermonPdf?.replace(/^\/|\/$/g, "");
+
+      let sermon: SupaSermon = {
+        date: html_date,
+        title: title,
+        youtube_id: embedId,
+        pdf: trimmed_pdf,
+      };
+
+      console.log(sermon);
+      addSermon(sermon, undefined).then(() => console.log("Added", html_date));
+    }
   };
 
   return (
@@ -46,11 +57,10 @@ function New({ user }) {
           <button>Cancel</button>
         </Link>
       </div>
-      <SermonEditor
-        sermonToEdit={undefined}
-        onSave={onSubmit}
-        submitError={sermonError}
-      />
+      <div>
+        <button onClick={onSubmit}>Upload</button>
+      </div>
+
       <style jsx>{`
         .row {
           display: flex;
@@ -67,4 +77,4 @@ function New({ user }) {
   );
 }
 
-export default New;
+export default Batch;

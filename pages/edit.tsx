@@ -20,7 +20,7 @@ function formSermonfromSupasermon(supa: SupaSermon): FormSermon {
   let formSermon: FormSermon = {
     title: supa.title,
     html_date: supa.date,
-    youtube: youtubeUrlFromId(supa.youtube_id),
+    youtube: supa.youtube_id ? youtubeUrlFromId(supa.youtube_id) : undefined,
     filename: supa.pdf ? supa.pdf : undefined,
   };
 
@@ -42,15 +42,17 @@ function Edit({ user }) {
   const onSubmit = (data: FormSermon) => {
     const { title, html_date, pdf, youtube } = data;
     // Get the embed id from the pasted youtube url
-    let embedId = youtubeIdfromUrl(youtube);
-    let file = pdf[0];
+    let embedId = youtube ? youtubeIdfromUrl(youtube) : undefined;
+    let file = pdf ? pdf[0] : undefined;
     //let fixedDate = new Date(html_date);
 
     // Generate a new PDF filename based on the date
     // But only if we have a new pdf we're uploading
     let file_name = file
       ? dateStringToPdfName(html_date)
-      : sermonToEdit.file_name;
+      : sermonToEdit.file_name
+      ? sermonToEdit.file_name
+      : undefined;
 
     let sermon: SupaSermon = {
       id: Number(id),

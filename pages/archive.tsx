@@ -42,8 +42,8 @@ function Archive({ sermons }) {
             key={sermon.id}
             date={sermon.date}
             title={sermon.title}
-            embedId={sermon.youtube_id}
-            sermonPdf={sermon.pdf}
+            embedId={sermon.youtube_id ? sermon.youtube_id : undefined}
+            sermonPdf={sermon.pdf ? sermon.pdf : undefined}
           />
         );
       })}

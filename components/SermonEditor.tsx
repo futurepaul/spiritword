@@ -31,7 +31,7 @@ export default function SermonEditor({ sermonToEdit, onSave, submitError }) {
           {errors.youtube && <span> * Not a valid YouTube URL</span>}
         </label>
         <input
-          {...register("youtube", { required: true, validate: isYouTubeUrl })}
+          {...register("youtube", { required: false, validate: isYouTubeUrl })}
         />
         <label>Sermon PDF</label>
         <input

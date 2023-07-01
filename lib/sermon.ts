@@ -64,14 +64,14 @@ export interface FormSermon {
   html_date: string;
   pdf?: FileList;
   filename?: string;
-  youtube: string;
+  youtube?: string;
 }
 
 export interface SupaSermon {
   id?: number;
   date: string;
   title: string;
-  youtube_id: string;
+  youtube_id?: string;
   pdf?: string;
 }
 
@@ -88,6 +88,9 @@ function snake_case_string(str: string) {
 }
 
 export function isYouTubeUrl(value: string): boolean {
+  if (!value) {
+    return true;
+  }
   let id: string = youtubeIdfromUrl(value);
   console.log(id);
   if (id) {

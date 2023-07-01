@@ -2,9 +2,19 @@ import Embed from "../components/Embed";
 import DownloadButton from "../components/DownloadButton";
 import { toPrettyDate } from "../lib/sermon";
 
-const SermonItem = ({ date, title, embedId, sermonPdf }) => (
+const SermonItem = ({
+  date,
+  title,
+  embedId,
+  sermonPdf,
+}: {
+  date: string;
+  title: string;
+  embedId?: string;
+  sermonPdf?: string;
+}) => (
   <div className="sermon-item">
-    <Embed id={embedId} />
+    {embedId && <Embed id={embedId} />}
     <div className="info">
       <h2>{toPrettyDate(date)}</h2>
       <div className="spacer" />

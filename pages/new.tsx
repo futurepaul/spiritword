@@ -24,8 +24,8 @@ function New({ user }) {
   const onSubmit = (data: FormSermon) => {
     const { title, html_date, pdf, youtube } = data;
     // Get the embed id from the pasted youtube url
-    let embedId = youtubeIdfromUrl(youtube);
-    let file = pdf[0];
+    let embedId = youtube ? youtubeIdfromUrl(youtube) : undefined;
+    let file = pdf ? pdf[0] : undefined;
     // Generate a new PDF filename based on the date
     let file_name = dateStringToPdfName(html_date);
     let sermon: SupaSermon = {

@@ -24,17 +24,19 @@ export default function SingleSermon({
     <div className="single">
       <h1>{toPrettyDate(date)}</h1>
       <h2>{title}</h2>
-      <a href={`https://youtu.be/${youtube_id}`}>
-        <Image
-          src={`https://i3.ytimg.com/vi/${youtube_id}/hqdefault.jpg`}
-          width="240"
-          height="180"
-        />
-      </a>
+      {youtube_id && (
+        <a href={`https://youtu.be/${youtube_id}`}>
+          <Image
+            src={`https://i3.ytimg.com/vi/${youtube_id}/hqdefault.jpg`}
+            width="240"
+            height="180"
+          />
+        </a>
+      )}
       <code>
         <p>date: "{date}"</p>
         <p>title: "{title}"</p>
-        <p>youtubeId: "{youtube_id}"</p>
+        {youtube_id && <p>youtubeId: "{youtube_id}"</p>}
         {pdf && <p>sermonPdf="{pdf}"</p>}
       </code>
       <div className="buttons">
